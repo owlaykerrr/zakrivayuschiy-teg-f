@@ -26,7 +26,7 @@
   background-attachment: fixed;
   background-color: var(--bg-color);
   color: var(--accent-color);
-  font-variation-settings: var(--main-weight-text);
+  font-variation-settings:"wght" var(--main-weight-text), "slnt" 0;
 }
 
 .header {
