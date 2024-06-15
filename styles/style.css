@@ -45,6 +45,7 @@
   font-size: clamp(3.063rem, 2.71rem + 1.5vw, 4.063rem);
   font-weight: 400;
   padding-block-end: 18px;
+  text-transform: uppercase;
 }
 
 .header-subtitle {
@@ -130,8 +131,8 @@ main {
 
 .card-title {
   font-family: var(--main-font);
-  font-weight: 700;
   font-size: 18px;
+  font-variation-settings:"wght" var(--main-weight-title), "slnt" 0;
   padding: 3px 24px 7px 12px;
   line-height: 22px;
 }
@@ -184,6 +185,7 @@ main {
 }
 
 .card-label {
+  display: block;
   font-family: var(--accent-font);
   text-align: end;
   font-size: 14px;
@@ -203,6 +205,7 @@ main {
 ) {
   .card-label {
     -webkit-text-stroke: 1px var(--color-text-stroke);
+    text-stroke: 1px var(--color-text-stroke) ;
     text-shadow: none;
   }
 }
@@ -210,7 +213,7 @@ main {
 .card-text {
   padding: 25px 25px 25px 25px;
   font-family: var(--main-font);
-  font-weight: 400;
+  font-variation-settings:"wght" var(--main-weight-text), "slnt" 0;
   font-size: 18px;
   line-height: 22px;
 }
@@ -241,7 +244,9 @@ main {
   animation: button-shadow 0.3s ease forwards;
 }
 
-.card__like-button::before {
+
+
+.button-decorated::before {
   position: absolute;
   content: "";
   inline-size: 100%;
@@ -254,7 +259,7 @@ main {
   transition: transform 0.5s ease-in-out;
 }
 
-.card__like-button:hover::before {
+.button-decorated:hover::before {
   transform: scaleX(1);
 }
 
@@ -372,22 +377,7 @@ main {
   grid-column: 1/3;
 }
 
-.memory-button::before {
-  position: absolute;
-  content: "";
-  inline-size: 100%;
-  block-size: 100%;
-  top: 0;
-  left: 0;
-  background-color: var(--accent-color);
-  transform: scaleX(0);
-  transform-origin: 0 0;
-  transition: transform 0.5s ease-in-out;
-}
 
-.memory-button:hover::before {
-  transform: scaleX(1);
-}
 
 .memory-disk {
   inline-size: 21px;
@@ -395,8 +385,8 @@ main {
   z-index: 2;
   mix-blend-mode: difference;
   color: var(--mix-blend-color);
-}
-
+}   
+   
 dialog[open] {
   display: grid;
   padding: 31.5px;
@@ -421,87 +411,10 @@ dialog[open] .memory-button {
 }
 
 dialog::backdrop {
-  background-color: rgb(0 0 0 / 0.3);
-  backdrop-filter: blur(7px);
+  background-color: #000;
+  opacity: 0.75;
 }
 
-/*АНИМАЦИИ (ПЕРЕДЕЛАТЬ НЕКОТОРЫЕ В ТРАНЗИШН НЕ ЗАБЫТЬ*/
-
-/*анимация стрелочки*/
-@keyframes menu-arrow {
-  0% {
-    left: -15px;
-  }
-
-  100% {
-    left: -10px;
-  }
-}
-
-/*опасити на кнопке в меню*/
-@keyframes opacityhov-button {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.6;
-  }
-}
-
-/*выезжающий бордерлайн в меню*/
-@keyframes border-line {
-  0% {
-    transform: scaleX(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scaleX(1);
-    opacity: 0.6;
-  }
-}
-
-/*тень на кнопке лайк при ховере*/
-@keyframes button-shadow {
-  0% {
-    box-shadow: 0 0 0 transparent;
-  }
-
-  100% {
-    box-shadow: 2px 2px 0 var(--accent-color);
-  }
-}
-
-/*кейфрейм на масштаб сердца*/
-@keyframes heart-scale {
-  0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.5);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-/*кейфрейм на искорки*/
-@keyframes heart-sparks {
-  0% {
-    opacity: 0;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-  }
-}
 
 @media (width <= 375px) {
   .page {
