@@ -13,80 +13,203 @@
 Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 */
 
-/*АНИМАЦИИ (ПЕРЕДЕЛАТЬ НЕКОТОРЫЕ В ТРАНЗИШН НЕ ЗАБЫТЬ*/
+.theme-menu__button:focus {
+  outline: none;
+  opacity: 0.6;
+}
+
+.theme-menu__button:hover {
+  animation: opacityhov-button 0.3s ease forwards;
+}
+
+.theme-menu__button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.theme-menu__button:disabled::before {
+  position: absolute;
+  content: "▶";
+  left: -15px;
+  animation: menu-arrow 0.5s infinite alternate ease-in-out;
+}
+
+.theme-menu__button:focus-visible::after {
+  position: absolute;
+  content: "";
+  bottom: -2px;
+  left: 0;
+  inline-size: 100%;
+  block-size: 2px;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  animation: border-line 0.3s forwards;
+}
+
+.button-decorated:focus-visible {
+  box-shadow: 2px 2px 0 var(--accent-color);
+  animation: button-shadow 0.3s ease forwards;
+}
+
+.button-decorated::before {
+  position: absolute;
+  content: "";
+  inline-size: 100%;
+  block-size: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: 0 0;
+  transition: transform 0.5s ease-in-out;
+}
+
+.button-decorated:hover::before {
+  transform: scaleX(1);
+}
+
+.card__icon-button:focus-visible {
+  outline: var(--border-container);
+  outline-offset: -2px;
+  transition: outline 0.3s ease;
+}
+
+.contour {
+  fill: var(--heart-contour);
+  transition: fill 0.1s linear;
+}
+
+.sparks {
+  fill: var(--heart-fill);
+  opacity: 0;
+}
+
+.core {
+  fill: transparent;
+  transition: fill 0.3s 0.03s linear;
+}
+
+.main-body {
+  fill: transparent;
+  transition: fill 0.3s 0.05s linear;
+}
+
+.like-icon:hover {
+  .core {
+    fill: var(--accent-color);
+    transition: 0.3s;
+  }
+
+  .main-body {
+    fill: var(--accent-color);
+    transition: 0.5s;
+  }
+}
+
+.like-icon:active {
+  .core,
+  .main-body {
+    fill: var(--heart-fill);
+  }
+}
+
+.like-icon.is-liked {
+  .core {
+    fill: var(--heart-fill);
+  }
+
+  .main-body {
+    fill: var(--heart-fill);
+  }
+
+  .contour {
+    fill: var(--heart-fill);
+  }
+}
+
+.like-icon.is-liked .heart {
+  transform: scale(1);
+  transform-origin: center;
+  animation: heart-scale 0.3s 0.1s ease-in;
+}
+
+.like-icon.is-liked .sparks {
+  animation: heart-sparks 0.3s 0.3s ease-in;
+}
 
 /*анимация стрелочки*/
 @keyframes menu-arrow {
-    0% {
-      left: -15px;
-    }
-  
-    100% {
-      left: -10px;
-    }
+  0% {
+    left: -15px;
   }
-  
-  /*опасити на кнопке в меню*/
-  @keyframes opacityhov-button {
-    0% {
-      opacity: 1;
-    }
-  
-    100% {
-      opacity: 0.6;
-    }
+
+  100% {
+    left: -10px;
   }
-  
-  /*выезжающий бордерлайн в меню*/
-  @keyframes border-line {
-    0% {
-      transform: scaleX(0);
-      opacity: 1;
-    }
-  
-    100% {
-      transform: scaleX(1);
-      opacity: 0.6;
-    }
+}
+
+/*опасити на кнопке в меню*/
+@keyframes opacityhov-button {
+  0% {
+    opacity: 1;
   }
-  
-  /*тень на кнопке лайк при ховере*/
-  @keyframes button-shadow {
-    0% {
-      box-shadow: 0 0 0 transparent;
-    }
-  
-    100% {
-      box-shadow: 2px 2px 0 var(--accent-color);
-    }
+
+  100% {
+    opacity: 0.6;
   }
-  
-  /*кейфрейм на масштаб сердца*/
-  @keyframes heart-scale {
-    0% {
-      transform: scale(1);
-    }
-  
-    50% {
-      transform: scale(1.5);
-    }
-  
-    100% {
-      transform: scale(1);
-    }
+}
+
+/*выезжающий бордерлайн в меню*/
+@keyframes border-line {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
   }
-  
-  /*кейфрейм на искорки*/
-  @keyframes heart-sparks {
-    0% {
-      opacity: 0;
-    }
-  
-    50% {
-      opacity: 1;
-    }
-  
-    100% {
-      opacity: 0;
-    }
+
+  100% {
+    transform: scaleX(1);
+    opacity: 0.6;
   }
+}
+
+/*тень на кнопке лайк при ховере*/
+@keyframes button-shadow {
+  0% {
+    box-shadow: 0 0 0 transparent;
+  }
+
+  100% {
+    box-shadow: 2px 2px 0 var(--accent-color);
+  }
+}
+
+/*кейфрейм на масштаб сердца*/
+@keyframes heart-scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/*кейфрейм на искорки*/
+@keyframes heart-sparks {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
